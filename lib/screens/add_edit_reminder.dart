@@ -120,7 +120,7 @@ class _AddEditReminderScreenState extends State<AddEditReminderScreen>{
             ),
             SizedBox(height: 20),
             _buildDateTimerPicker(label: "Date", icon: Icons.calendar_today,
-            displayValue: displayValue, onPressed:),
+            displayValue: displayValue, onPressed: onPressed),
             SizedBox(height: 20),
                 ],
               ),
