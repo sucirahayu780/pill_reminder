@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pill_reminder/database/db_helper.dart';
 import 'package:pill_reminder/screens/home_screen.dart';
 import 'package:pill_reminder/services/notifications_helper.dart';
@@ -23,7 +23,6 @@ class _AddEditReminderScreenState extends State<AddEditReminderScreen>{
 
   @override
   void initState(){
-    // TODO: implement initState
     super.initState();
     if(widget.reminderId != null){
       fetchReminder();
@@ -76,7 +75,7 @@ class _AddEditReminderScreenState extends State<AddEditReminderScreen>{
                     border: InputBorder.none, 
                   ),
                   validator:(value) {
-                    value!.isEmpty ? "Please enter a title" : null;
+                  return value!.isEmpty ? "Please enter a title" : null;
                     },
                   ),
                 ),
@@ -92,6 +91,7 @@ class _AddEditReminderScreenState extends State<AddEditReminderScreen>{
                     border: InputBorder.none, 
                   ),
                   validator:(value) {
+                    return
                     value!.isEmpty ? "Please description" : null;
                     },
                   ),
@@ -119,9 +119,36 @@ class _AddEditReminderScreenState extends State<AddEditReminderScreen>{
               ),
             ),
             SizedBox(height: 20),
-            _buildDateTimerPicker(label: "Date", icon: Icons.calendar_today,
-            displayValue: displayValue, onPressed: onPressed),
-            SizedBox(height: 20),
+           _buildDateTimerPicker(
+            label: "Date", 
+            icon: Icons.calendar_today,
+            displayValue: DateFormat('yyyy-MM-dd').format(_remindersTime), 
+            onPressed: _selectDate,
+            ),
+            SizedBox(height: 10),
+          _buildDateTimerPicker(
+            label: "Time", 
+            icon: Icons.access_time,
+            displayValue: DateFormat('hh:mm a').format(_remindersTime), 
+            onPressed: _selectTime,
+                  ),
+            SizedBox(height: 30),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                  textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                ),
+              onPressed: _saveReminder,
+              child: Text("Save Reminder"),
+                    ),
+                  ),
                 ],
               ),
             ),  
@@ -143,7 +170,7 @@ class _AddEditReminderScreenState extends State<AddEditReminderScreen>{
       children: [
         Row(
         children: [
-        Icon(icon, color: Colors.teal),
+        Icon(Icon, color: Colors.teal),
         SizedBox(width: 10,),
         Text(
   label, 
