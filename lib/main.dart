@@ -6,8 +6,8 @@ import 'package:pill_reminder/services/notifications_helper.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await DbHelper.initDb();
-  await NotificationsHelper.InitializeNotifications();
+  // await DbHelper.initDb();
+  // await NotificationsHelper.InitializeNotifications();
   runApp(MyApp());
 }
 
